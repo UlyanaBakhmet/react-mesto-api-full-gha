@@ -1,0 +1,15 @@
+.burger-button_close .burger-button__line {
+  background-color: transparent;
+}
+
+.burger-button_close .burger-button__line::before {
+  width: 28px;
+  transform: rotate(45deg);
+  top: 0;
+}
+
+.burger-button_close .burger-button__line::after {
+  width: 28px;
+  transform: rotate(-45deg);
+  top: 0;
+}

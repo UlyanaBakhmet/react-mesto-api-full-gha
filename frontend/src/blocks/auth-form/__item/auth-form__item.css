@@ -1,0 +1,18 @@
+.auth-form__item {
+  width: 356px;
+  height: 40px;
+  padding: 0;
+  margin: 17px 0 0;
+  border: 0;
+  box-sizing: border-box;
+  font-size: 500;
+  outline: none;
+  border-bottom: 2px solid #ccc;
+  color: #fff;
+  background-color: black;
+  line-height: 15px;
+}
+
+.auth-form__item ::placeholder {
+  color: #ccc;
+}

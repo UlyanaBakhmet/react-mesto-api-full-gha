@@ -1,0 +1,22 @@
+.header__navigate-button {
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  color: #a9a9a9;
+  cursor: pointer;
+  transition: opacity 0.3s linear;
+  border: none;
+}
+
+.header__navigate-button:hover {
+  opacity: 0.6;
+}
+
+@media screen and (max-width: 600px) {
+  .header__navigate-button {
+    font-size: 14px;
+    padding-right: 20px;
+  }
+}
