@@ -24,7 +24,10 @@ app.use(errorLogger);
 app.use(errors());
 app.use(handleErrors);
 
-mongoose.connect('mongodb://127.0.0.1:27017/mestodb', { useNewUrlParser: true });
+// mongoose.connect('mongodb://127.0.0.1:27017/mestodb', { useNewUrlParser: true });
+mongoose.connect('mongodb://127.0.0.1:27017/mestodb')
+  .then(() => console.log('Успешное подключение к MongoDB'))
+  .catch((error) => console.error('Ошибка подключения:', error));
 
 app.listen(PORT, () => {
   console.log(`Запуск сервера на ${PORT} порту`);
