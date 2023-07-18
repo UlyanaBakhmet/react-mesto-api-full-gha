@@ -4,7 +4,15 @@ class Api {
   constructor({ url, headers }) {
     this._url = url;
     this._headers = headers;
+
+    // const token = localStorage.getItem("jwt")
+    // if (token)
+    //   this.setAuthToken(token);
   }
+  
+    // setAuthToken (token) {
+    //   this._headers.Authorization = `Bearer ${token}`;
+    // }
 
   _getResponseData(res) {
     if (res.ok) {

@@ -39,23 +39,62 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
 
   // инициализация начальных данных
+  // useEffect(() => {
+  //   if (loggedIn) {
+  //   Promise.all([api.getUsersInfo(), api.getInitialCards()])
+  //     .then(([currentUser, cards]) => {
+  //       setCurrentUser(currentUser);
+  //       setCards(cards);
+  //     })
+  //     .catch((err) => console.log(err));
+  //   }
+  // }, [loggedIn]);
+
+  // // Проверка токена при первой загрузке
+  // useEffect(() => {
+  //   // const jwt = localStorage.getItem('jwt');
+  //   // if (jwt) {
+  //     auth
+  //       // .getContent(jwt)
+  //       .getContent()
+  //       .then((res) => {
+  //         setLoggedIn(true);
+  //         setEmail(res.data.email);
+  //         navigate('/');
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   // }
+  // }, [navigate]);
   useEffect(() => {
-    if (loggedIn) {
-    Promise.all([api.getUsersInfo(), api.getInitialCards()])
-      .then(([currentUser, cards]) => {
+    if (!loggedIn) {
+    return;
+    }
+    api
+    .getUsersInfo()
+      .then(({ currentUser }) => {
         setCurrentUser(currentUser);
-        setCards(cards);
       })
       .catch((err) => console.log(err));
-    }
   }, [loggedIn]);
 
-  // Проверка токена при первой загрузке
   useEffect(() => {
-    const jwt = localStorage.getItem('jwt');
-    if (jwt) {
+    if (!loggedIn) {
+      return;
+      }
+      api
+      .getInitialCards()
+      .then(({ cards }) => setCards(cards))
+      .catch((err) => console.log(err));
+  }, [loggedIn]);
+
+  useEffect(() => {
+    if (!loggedIn) {
+      return;
+      }
       auth
-        .getContent(jwt)
+        .getContent()
         .then((res) => {
           setLoggedIn(true);
           setEmail(res.data.email);
@@ -64,8 +103,11 @@ function App() {
         .catch((err) => {
           console.log(err);
         });
-    }
-  }, [navigate]);
+  }, [navigate, loggedIn]);
+
+
+
+
 
   //обработчики тултип
   const handleInfoTooltip = () => {
@@ -184,7 +226,7 @@ function App() {
       .login(email, password)
       .then((data) => {
         if (data) {
-          localStorage.setItem('jwt', data.token);
+          // localStorage.setItem('jwt', data.token);
           setLoggedIn(true);
           setEmail(email);
           navigate('/');
@@ -199,7 +241,7 @@ function App() {
 
   //функция для выхода из профиля пользователя
   function signOut() {
-    localStorage.removeItem('jwt');
+    // localStorage.removeItem('jwt');
     navigate('/sign-in');
     setLoggedIn(false);
     setEmail('');

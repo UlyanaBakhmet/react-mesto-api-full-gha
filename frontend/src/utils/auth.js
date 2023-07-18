@@ -1,5 +1,5 @@
 // export const BASE_URL = "https://auth.nomoreparties.co"; //это у нас было от яндекса
-//export const BASE_URL = "https://localhost:3000"; //это позднее
+// export const BASE_URL = "https://localhost:4000"; //это позднее
 export const BASE_URL = 'https://api.bakhmet.nomoredomains.xyz';
 
 const getResponse = (res) => {
@@ -26,12 +26,24 @@ export const login = (email, password) => {
   }).then(getResponse);
 };
 
-export const getContent = (jwt) => {
+// export const getContent = (jwt) => {
+  export const getContent = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${jwt}`,
+      // Authorization: `Bearer ${jwt}`,
+      // Authorization: `Bearer ${token}`,
     },
   }).then(getResponse);
 };
+// export const checkToken = (token) => {
+//   return fetch(`${BASE_URL}/users/me`, {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       // Authorization: `Bearer ${jwt}`,
+//       Authorization: `Bearer ${token}`,
+//     },
+//   }).then(getResponse);
+// };
