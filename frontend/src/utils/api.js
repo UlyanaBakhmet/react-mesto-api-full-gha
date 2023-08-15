@@ -112,14 +112,6 @@ class Api {
       body: JSON.stringify(avatar),
     }).then((res) => this._getResponseData(res));
   }
-
-//   //лайк/не лайк
-//   changeLikeCardStatus(id, isLiked) {
-//     if (isLiked) {
-//       return this.addLike(id);
-//     }
-//     return this.deleteLike(id);
-//   }
 }
 
 const api = new Api(apiConfig);

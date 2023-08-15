@@ -1,7 +1,7 @@
 // export const BASE_URL = "https://auth.nomoreparties.co"; //это у нас было от яндекса
-export const BASE_URL = "http://localhost:3000"; //это после
+// export const BASE_URL = "http://localhost:3000"; //это после
 // export const BASE_URL = "http://localhost:3001";
-// export const BASE_URL = 'https://api.bakhmet.nomoredomains.xyz'; //это бэк
+export const BASE_URL = 'https://api.bakhmet.nomoredomains.xyz'; //это бэк
 
 const getResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
