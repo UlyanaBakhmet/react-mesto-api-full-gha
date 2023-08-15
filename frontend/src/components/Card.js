@@ -1,15 +1,14 @@
+import React from "react";
 import { useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-function Card({ card, onCardClick, onCardDelete, onCardLike }) {
+  function Card({ onCardClick, onDeleteCard, onCardLike, card }) {
   const currentUser = useContext(CurrentUserContext);
-  const { link, name, owner, likes } = card;
 
-  // Определяем, являемся ли мы владельцем текущей карточки
-  const isOwn = owner._id === currentUser._id;
+  const isOwn = card.owner === currentUser._id;
 
   // Определяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = likes.some((like) => like._id === currentUser._id);
+  const isLiked = card.likes.some((id) => id === currentUser._id);
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
   const cardLikeButtonClassName = `card__like-button ${
@@ -20,12 +19,12 @@ function Card({ card, onCardClick, onCardDelete, onCardLike }) {
     onCardClick(card);
   };
 
-  const handleDeleteClick = () => {
-    onCardDelete(card);
+  function handleConfirmDeleteCardPopup() {
+    onDeleteCard(card);
   };
 
   // Функция обработчик клика на лайк
-  const handleLikeClick = () => {
+    const handleCardLike = () => {
     onCardLike(card);
   };
 
@@ -33,27 +32,29 @@ function Card({ card, onCardClick, onCardDelete, onCardLike }) {
     <li className="card">
       <img
         className="card__image"
-        src={link}
-        alt={name}
+        src={card.link}
+        alt={card.name}
         onClick={handlePhotoClick}
       />
       <div className="card__info">
-        <h2 className="card__name">{name}</h2>
+        <h2 className="card__name">{card.name}</h2>
 
         <div className="card__like-container">
           <button
             className={cardLikeButtonClassName}
             type="button"
-            onClick={handleLikeClick}
+            onClick={handleCardLike}
           ></button>
-          <span className="card__like-calculator">{likes.length}</span>
+          <span className="card__like-calculator">{card.likes.length}</span>
         </div>
       </div>
+      {/* отображаем кнопку удаления только на своих карточках */}
       {isOwn && (
         <button
           className="card__button-delete"
+          aria-label="Delete"
           type="button"
-          onClick={handleDeleteClick}
+          onClick={handleConfirmDeleteCardPopup}
         ></button>
       )}
     </li>

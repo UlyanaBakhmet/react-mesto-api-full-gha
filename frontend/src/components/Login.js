@@ -15,12 +15,10 @@ function Login({ handleLogin, buttonText }) {
     });
   };
 
-  function handleSubmit(evt) {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    if (!userDataValue.email || !userDataValue.password) {
-      return;
-    }
-    handleLogin(userDataValue.email, userDataValue.password);
+    const { email, password } = userDataValue;
+    handleLogin(email, password);
   }
 
   return (
@@ -32,7 +30,7 @@ function Login({ handleLogin, buttonText }) {
           name="email"
           type="email"
           placeholder="E-mail"
-          value={userDataValue.email || ""}
+          value={userDataValue.email}
           onChange={handleChange}
           required
         />
@@ -41,7 +39,7 @@ function Login({ handleLogin, buttonText }) {
           name="password"
           type="password"
           placeholder="Пароль"
-          value={userDataValue.password || ""}
+          value={userDataValue.password}
           onChange={handleChange}
           required
         />

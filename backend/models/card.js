@@ -15,14 +15,14 @@ const cardSchema = new mongoose.Schema(
       required: [true, 'Поле заполнено некорректно'],
     },
     owner: {
-      type: mongoose.Types.ObjectId,
-      ref: 'User',
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
       required: [true, 'Пользователь не обнаружен'],
     },
     likes: [
       {
-        type: mongoose.Types.ObjectId,
-        ref: 'User',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user',
         default: [],
       },
     ],

@@ -7,6 +7,7 @@ function Register({ handleRegister, buttonText }) {
     password: "",
   });
 
+
   function handleChange(evt) {
     const { name, value } = evt.target;
 
@@ -14,12 +15,14 @@ function Register({ handleRegister, buttonText }) {
       ...userDataValue,
       [name]: value,
     });
-  }
+    }
+
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleRegister(userDataValue.email, userDataValue.password);
-  };
+    const { email, password } = userDataValue;
+    handleRegister(email, password);
+  }
 
   return (
     <section className="auth">
@@ -30,7 +33,7 @@ function Register({ handleRegister, buttonText }) {
           name="email"
           type="email"
           placeholder="Email"
-          value={userDataValue.email || ""}
+          value={userDataValue.email}
           onChange={handleChange}
           required
         />
@@ -39,7 +42,7 @@ function Register({ handleRegister, buttonText }) {
           name="password"
           type="password"
           placeholder="Пароль"
-          value={userDataValue.password || ""}
+          value={userDataValue.password}
           onChange={handleChange}
           required
         />

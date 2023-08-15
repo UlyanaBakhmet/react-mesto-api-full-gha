@@ -1,3 +1,6 @@
-const urlRegex = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+const { JWT_SECRET = 'JWT_SECRET' } = process.env;
 
-module.exports = { urlRegex };
+// eslint-disable-next-line no-useless-escape
+const urlRegex = /^https?:\/\/[\w\-\.\/~:\?\#\[\]@!$&'\(\)\*\+,;=]+[\-\.\/~:\?\#\[\]@!$&'\(\)\*\+,;=]{1}[\w\-\.\/~:\?\#\[\]@!$&'\(\)\*\+,;=]+[#\/]?$/;
+
+module.exports = { urlRegex, JWT_SECRET };

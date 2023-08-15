@@ -1,23 +1,23 @@
-import { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
 
-function EditProfilePopup({ isOpen, onClose, onOverlayClick, onUpdateUser }) {
+function EditProfilePopup({ isOpen, onClose, onOverlayClick, onUpdateUser, isLoading }) {
   const currentUser = useContext(CurrentUserContext);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+  const [name, setName] = useState();
+  const [description, setDescription] = useState();
 
   useEffect(() => {
     setName(currentUser.name);
     setDescription(currentUser.about);
   }, [currentUser, isOpen]);
 
-  const handleNameChange = ({ target }) => {
-    setName(target.value);
+  const handleNameChange = (evt) => {
+    setName(evt.target.value);
   };
 
-  const handleDescriptionChange = ({ target }) => {
-    setDescription(target.value);
+  const handleDescriptionChange = (evt) => {
+    setDescription(evt.target.value);
   };
 
   const handleSubmit = (evt) => {
@@ -38,7 +38,8 @@ function EditProfilePopup({ isOpen, onClose, onOverlayClick, onUpdateUser }) {
       onClose={onClose}
       onOverlayClick={onOverlayClick}
       onSubmit={handleSubmit}
-      buttonText="Сохранить"
+      isLoading={isLoading}
+      buttonText={isLoading ? 'Сохранение...' : 'Сохранить'}
     >
       <input
         className="popup__input popup__input_type_name"

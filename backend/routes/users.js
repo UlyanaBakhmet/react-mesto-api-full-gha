@@ -17,13 +17,11 @@ router.get('/me', getUser);
 
 router.get('/:userId', celebrate({
   params: Joi.object().keys({
-    userId: Joi.string().required().alphanum().hex()
-      .length(24),
+    userId: Joi.string().hex().length(24).required(),
   }),
 }), getUserById);
 
-// router.post('/', createUser);
-
+// обновление данных пользователя
 router.patch('/me', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
@@ -31,9 +29,10 @@ router.patch('/me', celebrate({
   }),
 }), updateUser);
 
+// обновление аватара пользователя
 router.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().required().regex(urlRegex),
+    avatar: Joi.string().regex(urlRegex).required(),
   }),
 }), updateAvatar);
 

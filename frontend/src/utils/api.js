@@ -5,14 +5,11 @@ class Api {
     this._url = url;
     this._headers = headers;
 
-    // const token = localStorage.getItem("jwt")
-    // if (token)
-    //   this.setAuthToken(token);
+    const token = localStorage.getItem("jwt")
+    // const token = localStorage.getItem("token")
+    if (token)
+      this.setAuthToken(token);
   }
-  
-    // setAuthToken (token) {
-    //   this._headers.Authorization = `Bearer ${token}`;
-    // }
 
   _getResponseData(res) {
     if (res.ok) {
@@ -21,10 +18,15 @@ class Api {
     return Promise.reject(`Ошибка: ${res.status}`);
   }
 
+  setAuthToken (token) {
+    this._headers.Authorization = `Bearer ${token}`;
+  }
+
   //получаем данные своего пользователя
   getUsersInfo() {
     return fetch(`${this._url}/users/me`, {
       method: "GET",
+      // credentials: "include",
       headers: this._headers,
     }).then((res) => this._getResponseData(res));
   }
@@ -33,27 +35,34 @@ class Api {
   getInitialCards() {
     return fetch(`${this._url}/cards`, {
       method: "GET",
+      // credentials: "include",
       headers: this._headers,
     }).then((res) => this._getResponseData(res));
   }
 
   //обновить данные своего пользователя
-  editUsersInfo(userName, userProfession) {
+// editUsersInfo({userName, userProfession}) {
+  editUsersInfo({name, about}) {
     return fetch(`${this._url}/users/me`, {
       method: "PATCH",
+      // credentials: this._credentials,
       headers: this._headers,
+      // credentials: "include",
       body: JSON.stringify({
-        name: userName,
-        about: userProfession,
+      //   name: userName,
+      //   about: userProfession,
+        name: name,
+        about: about
       }),
     }).then((res) => this._getResponseData(res));
   }
 
   //добавить карточку на сервер
-  addNewCard(name, link) {
+  addNewCard({ name, link }) {
     return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
+      // credentials: "include",
       body: JSON.stringify({
         name,
         link,
@@ -62,25 +71,34 @@ class Api {
   }
 
   //удалить карточку
-  deleteCard(id) {
-    return fetch(`${this._url}/cards/${id}`, {
+  // deleteCard(id) {
+    deleteCard(cardId) {
+    // return fetch(`${this._url}/cards/${id}`, {
+      return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
+      // credentials: "include",
       headers: this._headers,
     }).then((res) => this._getResponseData(res));
   }
 
   //поставить карточке лайк
-  addLike(id) {
-    return fetch(`${this._url}/cards/${id}/likes`, {
+  // addLike(id) {
+  addLike(cardId) {
+    // return fetch(`${this._url}/cards/${id}/likes`, {
+      return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
+      // credentials: "include",
       headers: this._headers,
     }).then((res) => this._getResponseData(res));
   }
 
   //удалить с карточки лайк
-  deleteLike(id) {
-    return fetch(`${this._url}/cards/${id}/likes`, {
+  // deleteLike(id) {
+  deleteLike(cardId) {
+    // return fetch(`${this._url}/cards/${id}/likes`, {
+      return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "DELETE",
+      // credentials: "include",
       headers: this._headers,
     }).then((res) => this._getResponseData(res));
   }
@@ -90,17 +108,18 @@ class Api {
     return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
+      // credentials: "include",
       body: JSON.stringify(avatar),
     }).then((res) => this._getResponseData(res));
   }
 
-  //лайк/не лайк
-  changeLikeCardStatus(id, isLiked) {
-    if (isLiked) {
-      return this.addLike(id);
-    }
-    return this.deleteLike(id);
-  }
+//   //лайк/не лайк
+//   changeLikeCardStatus(id, isLiked) {
+//     if (isLiked) {
+//       return this.addLike(id);
+//     }
+//     return this.deleteLike(id);
+//   }
 }
 
 const api = new Api(apiConfig);

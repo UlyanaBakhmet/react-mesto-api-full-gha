@@ -1,15 +1,14 @@
-import { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import PopupWithForm from "./PopupWithForm";
 
-function EditAvatarPopup({ onUpdateAvatar, onOverlayClick, isOpen, onClose }) {
-  const inputRef = useRef();
+function EditAvatarPopup({ onUpdateAvatar, onOverlayClick, isOpen, onClose, isLoading }) {
+const inputRef = useRef();
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
     onUpdateAvatar({
-      avatar: inputRef.current.value,
-    });
+      avatar: inputRef.current.value
+    })
   };
 
   useEffect(() => {
@@ -24,15 +23,15 @@ function EditAvatarPopup({ onUpdateAvatar, onOverlayClick, isOpen, onClose }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       onOverlayClick={onOverlayClick}
-      buttonText="Сохранить"
+      buttonText={isLoading? 'Обновление...' : 'Обновить аватар'}
     >
       <input
+      ref={inputRef}
         className="popup__input popup__input_type_avatar-link"
         id="avatarLink"
         type="url"
         name="link"
         placeholder="Ссылка на аватар"
-        ref={inputRef}
         required
       />
       <span className="popup__error avatarLink-error"></span>
