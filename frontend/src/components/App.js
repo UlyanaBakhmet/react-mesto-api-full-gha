@@ -213,7 +213,7 @@ function App() {
       }
     };
 
-  function handleRegister({email, password}) {
+  function handleRegister(email, password) {
     auth
       .register(email, password)
         .then((res) => {
