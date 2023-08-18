@@ -217,13 +217,21 @@ function App() {
       .then((res) => {
         if (res) {
           handleInfoTooltip();
-          setIsSuccessful(true);
+          // setIsSuccessful(true);
+          setIsSuccessful({
+            status: true,
+            text: 'Вы успешно зарегистрировались!',
+          });
           navigate("/sign-in", { replace: true });
         }
       })
       .catch((err) => {
         handleInfoTooltip();
-        setIsSuccessful(false);
+        // setIsSuccessful(false);
+        setIsSuccessful({
+          status: false,
+          text: 'Что-то пошло не так! Попробуйте ещё раз.',
+        })
         console.log(err);
       });
   }
