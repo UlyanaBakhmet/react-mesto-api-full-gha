@@ -219,7 +219,7 @@ function App() {
         if (res) {
           handleInfoTooltip();
           setIsSuccessful(true);
-          navigate("/sign-in");
+          navigate("/sign-in", { replace: true });
         }
       })
       .catch((err) => {
