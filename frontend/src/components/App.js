@@ -25,7 +25,7 @@ function App() {
   const [email, setEmail] = useState("");
   //переменная состояния внутри попапа регистрации
   // const [isSuccessful, setIsSuccessful] = useState(false);
-  const [success, setIsSuccessful] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
   //переменная для открытия попапа регистрации
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   //переменная состояния открытого модального окна
@@ -361,8 +361,7 @@ function App() {
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
-          // text={isSuccessful}
-          isSuccessful={success}
+          isSuccessful={isSuccessful}
           onOverlayClick={handleOverlayClick}
         />
       </div>

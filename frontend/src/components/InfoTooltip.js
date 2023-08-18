@@ -1,20 +1,20 @@
-import React from "react";
+// import React from "react";
 import error from "../images/error.png";
 import success from "../images/success2.png";
 
 function InfoTooltip({ isOpen, onClose, isSuccessful, onOverlayClick }) {
-  // const message = `${
-  //   isSuccessful
-  //     ? "Вы успешно зарегистрировались!"
-  //     : `Что-то пошло не так!
+  const message = `${
+    isSuccessful
+      ? "Вы успешно зарегистрировались!"
+      : `Что-то пошло не так!
+    Попробуйте ещё раз.`
+  }`;
+  // const text = isSuccessful
+  // ? "Вы успешно зарегистрировались!"
+  // : `Что-то пошло не так!
   //   Попробуйте ещё раз.`
-  // }`;
-  const text = isSuccessful
-  ? "Вы успешно зарегистрировались!"
-  : `Что-то пошло не так!
-    Попробуйте ещё раз`
 
-  // const icon = `${isSuccessful ? success : error}`;
+  const icon = `${isSuccessful ? success : error}`;
   return (
     <section
       className={`popup ${isOpen ? "popup_opened" : ""}`}
@@ -27,14 +27,12 @@ function InfoTooltip({ isOpen, onClose, isSuccessful, onOverlayClick }) {
           className="popup__close-button"
           onClick={onClose}
         />
-        {/* <img
+        <img
           className="popup__icon popup__icon_type_tooltip"
-          // src={icon}
-          src={isSuccessful.status ? success : error}
-          // alt={message}
-          alt='статус регистрации'
-        /> */}
-        {isSuccessful ? (
+          src={icon}
+          alt={message}
+        />
+        {/* {isSuccessful ? (
         <img 
         className="popup__icon popup__icon_type_tooltip"
         src={success}
@@ -46,8 +44,8 @@ function InfoTooltip({ isOpen, onClose, isSuccessful, onOverlayClick }) {
         src={error}
         alt='Не успешно'
         />
-        )}
-        <p className="popup__info">{text}</p>
+        )} */}
+        <p className="popup__info">{message}</p>
       </div>
     </section>
   );
