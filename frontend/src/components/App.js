@@ -24,7 +24,8 @@ function App() {
   //переменная для мейла
   const [email, setEmail] = useState("");
   //переменная состояния внутри попапа регистрации
-  const [isSuccessful, setIsSuccessful] = useState(false);
+  // const [isSuccessful, setIsSuccessful] = useState(false);
+  const [success, setIsSuccessful] = useState(false);
   //переменная для открытия попапа регистрации
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   //переменная состояния открытого модального окна
@@ -217,21 +218,13 @@ function App() {
       .then((res) => {
         if (res) {
           handleInfoTooltip();
-          // setIsSuccessful(true);
-          setIsSuccessful({
-            status: true,
-            text: 'Вы успешно зарегистрировались!',
-          });
+          setIsSuccessful(true);
           navigate("/sign-in", { replace: true });
         }
       })
       .catch((err) => {
         handleInfoTooltip();
-        // setIsSuccessful(false);
-        setIsSuccessful({
-          status: false,
-          text: 'Что-то пошло не так! Попробуйте ещё раз',
-        })
+        setIsSuccessful(false);
         console.log(err);
       });
   }
@@ -249,10 +242,7 @@ function App() {
       })
       .catch((err) => {
         handleInfoTooltip();
-        setIsSuccessful({
-          status: false,
-          text: 'Что-то пошло не так!',
-        })
+        setIsSuccessful(false)
         console.log(err);
       });
   }
@@ -372,7 +362,7 @@ function App() {
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
           // text={isSuccessful}
-          isSuccessful={setIsSuccessful}
+          isSuccessful={success}
           onOverlayClick={handleOverlayClick}
         />
       </div>
