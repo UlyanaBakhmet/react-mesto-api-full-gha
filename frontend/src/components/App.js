@@ -242,7 +242,7 @@ function App() {
       })
       .catch((err) => {
         handleInfoTooltip();
-        setIsSuccessful(false)
+        // setIsSuccessful(false)
         console.log(err);
       });
   }
@@ -354,7 +354,7 @@ function App() {
           card={selectedCard}
           onOverlayClick={handleOverlayClick}
           // text={isSuccessful}
-          isSuccessful={setIsSuccessful}
+          // isSuccessful={setIsSuccessful}
           onClose={closeAllPopups}
         ></ImagePopup>
 
