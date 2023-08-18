@@ -353,8 +353,6 @@ function App() {
           isOpen={isConfirmPopupOpen}
           card={selectedCard}
           onOverlayClick={handleOverlayClick}
-          // text={isSuccessful}
-          // isSuccessful={setIsSuccessful}
           onClose={closeAllPopups}
         ></ImagePopup>
 
