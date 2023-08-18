@@ -24,8 +24,8 @@ function App() {
   //переменная для мейла
   const [email, setEmail] = useState("");
   //переменная состояния внутри попапа регистрации
-  // const [isSuccessful, setIsSuccessful] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
+  // const [isSuccessful, setIsSuccessful] = useState(false);
   //переменная для открытия попапа регистрации
   const [isInfoTooltipPopupOpen, setInfoTooltipPopupOpen] = useState(false);
   //переменная состояния открытого модального окна
@@ -219,7 +219,7 @@ function App() {
         if (res) {
           handleInfoTooltip();
           setIsSuccessful(true);
-          navigate("/sign-in", { replace: true });
+          navigate("/sign-in");
         }
       })
       .catch((err) => {
