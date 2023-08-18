@@ -9,12 +9,12 @@ const { login, createUser } = require('../controllers/users');
 const auth = require('../middlewares/auth');
 const { urlRegex } = require('../utils/constants');
 
-// краш-тест согласно ТЗ
-// router.get('/crash-test', () => {
-//   setTimeout(() => {
-//     throw new Error('Сервер сейчас упадёт');
-//   }, 0);
-// });
+// краш-тест
+router.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 
 // авторизация пользователя с валидацией
 router.post('/signin', celebrate({

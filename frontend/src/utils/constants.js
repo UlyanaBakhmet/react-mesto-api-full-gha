@@ -1,7 +1,6 @@
 //экземпляр класса АПИ для работы с сервером
 export const apiConfig = {
     // url: 'https://mesto.nomoreparties.co/v1/cohort-54',
-    // url: 'https://api.bakhmet.nomoredomains.xyz',
     url: 'https://bakhmet.nomoreparties.co',
     // url: 'http://localhost:3000',
     headers: {

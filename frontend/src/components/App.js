@@ -7,7 +7,6 @@ import Footer from "./Footer";
 import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import AddPlacePopup from "./AddPlacePopup";
-// import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 import PopupWithConfirmation from './PopupWithConfirmation';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
@@ -60,12 +59,9 @@ function App() {
   
   // Проверка токена при первой загрузке
   useEffect(() => {
-      // const token = localStorage.getItem('token');
       const jwt = localStorage.getItem('jwt');
-        // if (token) {
           if (jwt) {
         auth
-        // .tokenCheck(token)
         .tokenCheck(jwt)
           .then((res) => {
             if (res) {
@@ -235,7 +231,6 @@ function App() {
       auth
       .login(email, password)
         .then((data) => {
-          // localStorage.setItem('token', data.token);
           localStorage.setItem('jwt', data.token);
           api.setAuthToken(data.token);
           setLoggedIn(true);
@@ -244,7 +239,6 @@ function App() {
         })
         .catch((err) => {
           handleInfoTooltip();
-          // setInfoTooltipPopupOpen(true);
           setIsSuccessful(false);
           console.log(err);
       })
@@ -253,7 +247,6 @@ function App() {
 
   //функция для выхода из профиля пользователя
   const signOut = () => {
-    // localStorage.removeItem('token');
     localStorage.removeItem('jwt');
     navigate('/sign-in', { replace: true });
     setLoggedIn(false);
@@ -349,14 +342,6 @@ function App() {
           onClose={closeAllPopups}
           isLoading={isLoading}
         />
-
-        {/* <PopupWithForm
-          name="submit"
-          title="Вы уверены?"
-          buttonText="Да"
-          isOpen={isConfirmPopupOpen}
-          onClose={closeAllPopups}
-        ></PopupWithForm> */}
 
          <PopupWithConfirmation
           isOpen={isConfirmPopupOpen}
