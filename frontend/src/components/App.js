@@ -216,7 +216,7 @@ function App() {
       .register(email, password)
       .then((res) => {
         if (res) {
-          handleInfoTooltip();
+          // handleInfoTooltip();
           // setIsSuccessful(true);
           setIsSuccessful({
             status: true,
@@ -226,11 +226,11 @@ function App() {
         }
       })
       .catch((err) => {
-        handleInfoTooltip();
+        // handleInfoTooltip();
         // setIsSuccessful(false);
         setIsSuccessful({
           status: false,
-          text: 'Что-то пошло не так! Попробуйте ещё раз.',
+          text: 'Что-то пошло не так! Попробуйте ещё раз',
         })
         console.log(err);
       });
