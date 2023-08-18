@@ -3,14 +3,14 @@ import error from "../images/error.png";
 import success from "../images/success.png";
 
 function InfoTooltip({ isOpen, onClose, isSuccessful, onOverlayClick }) {
-  const message = `${
-    isSuccessful
-      ? "Вы успешно зарегистрировались!"
-      : `Что-то пошло не так!
-    Попробуйте ещё раз.`
-  }`;
+  // const message = `${
+  //   isSuccessful
+  //     ? "Вы успешно зарегистрировались!"
+  //     : `Что-то пошло не так!
+  //   Попробуйте ещё раз.`
+  // }`;
 
-  const icon = `${isSuccessful ? success : error}`;
+  // const icon = `${isSuccessful ? success : error}`;
   return (
     <section
       className={`popup ${isOpen ? "popup_opened" : ""}`}
@@ -25,10 +25,13 @@ function InfoTooltip({ isOpen, onClose, isSuccessful, onOverlayClick }) {
         />
         <img
           className="popup__icon popup__icon_type_tooltip"
-          src={icon}
-          alt={message}
+          // src={icon}
+          src={isSuccessful.status ? success : error}
+          // alt={message}
+          alt='статус регистрации'
         />
-        <p className="popup__info">{message}</p>
+        {/* <p className="popup__info">{message}</p> */}
+        <p className="popup__info">{isSuccessful.text}</p>
       </div>
     </section>
   );

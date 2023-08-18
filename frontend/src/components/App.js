@@ -249,7 +249,10 @@ function App() {
       })
       .catch((err) => {
         handleInfoTooltip();
-        setIsSuccessful(false);
+        setIsSuccessful({
+          status: false,
+          text: 'Что-то пошло не так!',
+        })
         console.log(err);
       });
   }
@@ -360,14 +363,16 @@ function App() {
           isOpen={isConfirmPopupOpen}
           card={selectedCard}
           onOverlayClick={handleOverlayClick}
-          text={isSuccessful}
+          // text={isSuccessful}
+          isSuccessful={setIsSuccessful}
           onClose={closeAllPopups}
         ></ImagePopup>
 
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
-          text={isSuccessful}
+          // text={isSuccessful}
+          isSuccessful={setIsSuccessful}
           onOverlayClick={handleOverlayClick}
         />
       </div>
