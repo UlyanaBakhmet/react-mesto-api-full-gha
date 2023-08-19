@@ -43,7 +43,7 @@ router.use(auth);
 router.use('/users', userRoutes);
 router.use('/cards', cardRoutes);
 
-router.use('*', () => {
+router.use('/*', () => {
   throw new NotFoundError('Ошибка 404: страница не найдена');
 });
 

@@ -40,3 +40,4 @@ const inputRef = useRef();
 }
 
 export default EditAvatarPopup;
+

@@ -18,15 +18,11 @@ function Register({ handleRegister, buttonText }) {
     }
 
 
-  // const handleSubmit = (evt) => {
-  //   evt.preventDefault();
-  //   const { email, password } = userDataValue;
-  //   handleRegister(email, password);
-  // }
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    handleRegister(userDataValue.email, userDataValue.password);
-  };
+    const { email, password } = userDataValue;
+    handleRegister(email, password);
+  }
 
   return (
     <section className="auth">
@@ -37,7 +33,7 @@ function Register({ handleRegister, buttonText }) {
           name="email"
           type="email"
           placeholder="Email"
-          value={userDataValue.email || ''}
+          value={userDataValue.email}
           onChange={handleChange}
           required
         />
@@ -46,7 +42,7 @@ function Register({ handleRegister, buttonText }) {
           name="password"
           type="password"
           placeholder="Пароль"
-          value={userDataValue.password || ''}
+          value={userDataValue.password}
           onChange={handleChange}
           required
         />

@@ -12,8 +12,7 @@ function Main({
   cards
 }) {
 
-  // const currentUser = useContext(CurrentUserContext);
-  const { name, about, avatar } = useContext(CurrentUserContext);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main>
@@ -24,18 +23,15 @@ function Main({
             type="button"
             onClick={onEditAvatar}
           ></button>
-          {/* <img className="profile__avatar" src={currentUser.avatar} alt="Аватар" /> */}
-          <img className="profile__avatar" src={avatar} alt="Аватар" />
+          <img className="profile__avatar" src={currentUser.avatar} alt="Аватар" />
           <div className="profile__info">
-            {/* <h1 className="profile__name">{currentUser.name}</h1> */}
-            <h1 className="profile__name">{name}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               className="profile__edit-button"
               type="button"
               onClick={onEditProfile}
             ></button>
-            {/* <p className="profile__profession">{currentUser.about}</p> */}
-            <p className="profile__profession">{about}</p>
+            <p className="profile__profession">{currentUser.about}</p>
           </div>
         </div>
         <button

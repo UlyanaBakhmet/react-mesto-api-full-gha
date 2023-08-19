@@ -15,18 +15,11 @@ function Login({ handleLogin, buttonText }) {
     });
   };
 
-//  function handleSubmit(evt) {
-//     evt.preventDefault();
-//     const { email, password } = userDataValue;
-//     handleLogin(email, password);
-//   }
-function handleSubmit(evt) {
-  evt.preventDefault();
-  if (!userDataValue.email || !userDataValue.password) {
-    return;
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    const { email, password } = userDataValue;
+    handleLogin(email, password);
   }
-  handleLogin(userDataValue.email, userDataValue.password);
-}
 
   return (
     <section className="auth">
@@ -37,7 +30,7 @@ function handleSubmit(evt) {
           name="email"
           type="email"
           placeholder="E-mail"
-          value={userDataValue.email || ''}
+          value={userDataValue.email}
           onChange={handleChange}
           required
         />
@@ -46,7 +39,7 @@ function handleSubmit(evt) {
           name="password"
           type="password"
           placeholder="Пароль"
-          value={userDataValue.password || ''}
+          value={userDataValue.password}
           onChange={handleChange}
           required
         />

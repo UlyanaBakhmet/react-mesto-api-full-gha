@@ -56,17 +56,6 @@ function App() {
         .catch((err) => console.log(err));
     }
   }, [loggedIn]);
-  // useEffect(() => {
-  //   if (loggedIn) {
-  //     api.setAuthToken();
-  //     Promise.all([api.getUsersInfo(), api.getInitialCards()])
-  //       .then(([dataUser, cards]) => {
-  //         setCurrentUser(dataUser);
-  //         setCards(cards);
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, [loggedIn]);
 
   // Проверка токена при первой загрузке
   useEffect(() => {
@@ -78,8 +67,7 @@ function App() {
           if (res) {
             setLoggedIn(true);
             setEmail(res.email);
-            // navigate("/", { replace: true });
-            navigate("/");
+            navigate("/", { replace: true });
           }
         })
         .catch((err) => {
@@ -224,7 +212,7 @@ function App() {
   }
 
   function handleRegister(email, password) {
-    return auth
+    auth
       .register(email, password)
       .then((res) => {
         if (res) {
@@ -239,20 +227,6 @@ function App() {
         console.log(err);
       });
   }
-  // function handleRegister(email, password) {
-  //   return auth
-  //     .register(email, password)
-  //     .then(() => {
-  //         handleInfoTooltip();
-  //         setIsSuccessful(true);
-  //         navigate("/sign-in");
-  //     })
-  //     .catch((err) => {
-  //       handleInfoTooltip();
-  //       setIsSuccessful(false);
-  //       console.log(err);
-  //     });
-  // }
 
   //функция для входа пользователя
   function handleLogin(email, password) {
@@ -271,21 +245,6 @@ function App() {
         console.log(err);
       });
   }
-  // function handleLogin(email, password) {
-  //   return auth
-  //     .login(email, password)
-  //     .then((res) => {
-  //       localStorage.setItem("jwt", res.token);
-  //       setLoggedIn(true);
-  //       setEmail(email);
-  //       navigate("/");
-  //     })
-  //     .catch((err) => {
-  //       handleInfoTooltip();
-  //       setIsSuccessful(false);
-  //       console.log(err);
-  //     });
-  // }
 
   //функция для выхода из профиля пользователя
   const signOut = () => {
@@ -409,3 +368,4 @@ function App() {
 }
 
 export default App;
+
