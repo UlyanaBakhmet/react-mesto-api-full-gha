@@ -1,6 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const User = require('../models/user');
 
 const ValidationError = require('../errors/ValidationError'); // 400
@@ -12,39 +12,95 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 module.exports.getUsers = (req, res, next) => {
   User
     .find({})
-    .then((users) => res.status(200).send(users))
-    .catch(next);
+    .then((users) => res.status(200).send({ users }))
+    // .catch(next);
+    .catch((err) => next(err));
 };
 
+// module.exports.getUser = (req, res, next) => {
+//   const { _id } = req.user;
+//   User.findById(_id)
+//     .then((user) => {
+//       if (!user) {
+//         throw new NotFoundError('Пользователь по указанному _id не найден');
+//       }
+//       return res.status(200).send(user);
+//     })
+//     .catch(next);
+// };
 module.exports.getUser = (req, res, next) => {
   const { _id } = req.user;
   User.findById(_id)
-    .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь по указанному _id не найден');
-      }
-      return res.status(200).send(user);
-    })
+    .then((user) => res.send(user))
     .catch(next);
 };
 
+// module.exports.getUserById = (req, res, next) => {
+//   const { userId } = req.params;
+//   User.findById(userId)
+//     .then((user) => {
+//       if (!user) {
+//         throw new NotFoundError('Пользователь с таким ID не найден');
+//       }
+//       return res.status(200).send(user);
+//     })
+//     .catch((err) => {
+//       if (err instanceof mongoose.Error.ValidationError) {
+//         return next(new NotFoundError('Указан некорректный ID'));
+//       }
+//       return next(err);
+//     });
+// };
 module.exports.getUserById = (req, res, next) => {
   const { userId } = req.params;
   User.findById(userId)
+    .orFail(() => new NotFoundError('Пользователь с таким ID не найден'))
     .then((user) => {
-      if (!user) {
-        throw new NotFoundError('Пользователь с таким ID не найден');
-      }
-      return res.status(200).send(user);
+      res.status(200).send(user);
     })
     .catch((err) => {
-      if (err instanceof mongoose.Error.ValidationError) {
-        return next(new NotFoundError('Указан некорректный ID'));
+      if (err.kind === 'ObjectId') {
+        next(new ValidationError('Указан некорректный ID'));
+      } else {
+        next(err);
       }
-      return next(err);
     });
 };
 
+// module.exports.createUser = (req, res, next) => {
+//   const {
+//     name, about, avatar, email, password,
+//   } = req.body;
+
+//   bcrypt
+//     .hash(password, 10)
+//     .then((hash) => User.create({
+//       name,
+//       about,
+//       avatar,
+//       email,
+//       password: hash,
+//     }))
+//     .then((newUser) => {
+//       const { _id } = newUser;
+//       res.status(201).send({
+//         name,
+//         about,
+//         avatar,
+//         email,
+//         _id,
+//       });
+//     })
+//     .catch((err) => {
+//       if (err instanceof mongoose.Error.ValidationError) {
+//         return next(new ValidationError('Предоставлены некорректные данные'));
+//       }
+//       if (err.code === 11000 && err.name === 'MongoServerError') {
+//         return next(new ConflictError('Пользователь с таким email уже существует'));
+//       }
+//       return next(err);
+//     });
+// };
 module.exports.createUser = (req, res, next) => {
   const {
     name, about, avatar, email, password,
@@ -59,24 +115,23 @@ module.exports.createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then((newUser) => {
-      const { _id } = newUser;
-      res.status(201).send({
-        name,
-        about,
-        avatar,
-        email,
-        _id,
-      });
-    })
+    .then((user) => res.status(201).send({
+      name: user.name,
+      about: user.about,
+      avatar: user.avatar,
+      _id: user._id,
+      email: user.email,
+    }))
     .catch((err) => {
-      if (err instanceof mongoose.Error.ValidationError) {
-        return next(new ValidationError('Предоставлены некорректные данные'));
+      if (err.name === 'ValidationError') {
+        next(new ValidationError('Предоставлены некорректные данные'));
+        return;
       }
-      if (err.code === 11000 && err.name === 'MongoServerError') {
-        return next(new ConflictError('Пользователь с таким email уже существует'));
+      if (err.code === 11000) {
+        next(new ConflictError('Пользователь с таким email уже существует'));
+        return;
       }
-      return next(err);
+      next(err);
     });
 };
 

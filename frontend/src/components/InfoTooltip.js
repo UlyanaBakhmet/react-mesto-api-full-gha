@@ -11,7 +11,6 @@ function InfoTooltip({ isOpen, onClose, isSuccessful, onOverlayClick }) {
   }`;
 
   const icon = `${isSuccessful ? success : error}`;
-
   return (
     <section
       className={`popup ${isOpen ? "popup_opened" : ""}`}

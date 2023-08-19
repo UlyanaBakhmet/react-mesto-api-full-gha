@@ -9,6 +9,11 @@ class Api {
     if (token)
       this.setAuthToken(token);
   }
+// class Api {
+//   constructor({ url, headers }) {
+//     this._url = url;
+//     this._headers = headers;
+//   }
 
   _getResponseData(res) {
     if (res.ok) {
@@ -20,6 +25,9 @@ class Api {
   setAuthToken (token) {
     this._headers.Authorization = `Bearer ${token}`;
   }
+  // setAuthToken() {
+  //   this._headers.authorization = `Bearer${localStorage.getItem('jwt')}`;
+  // }
 
   //получаем данные своего пользователя
   getUsersInfo() {
