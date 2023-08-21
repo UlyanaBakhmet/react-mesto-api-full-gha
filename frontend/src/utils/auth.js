@@ -5,14 +5,6 @@ export const BASE_URL = 'https://api.bakhmet.nomoreparties.co'; //это бэк
 const getResponse = (res) => {
   return res.ok ? res.json() : Promise.reject(`Ошибка: ${res.status}`);
 };
-// function getResponse(res) { 
-
-//   if (!res.ok) { 
-//     return Promise.reject(`Ошибка: ${res.status}`); 
-//   } 
-//   return res.json(); 
-
-// }
 
 export const register = (email, password) => {
   return fetch(`${BASE_URL}/signup`, {
