@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 function Register({ handleRegister, buttonText }) {
-  const [userDataValue, setUserDataValue] = useState({
+  const [formValue, setUserDataValue] = useState({
     email: "",
     password: "",
   });
@@ -12,7 +12,7 @@ function Register({ handleRegister, buttonText }) {
     const { name, value } = evt.target;
 
     setUserDataValue({
-      ...userDataValue,
+      ...formValue,
       [name]: value,
     });
     }
@@ -20,7 +20,7 @@ function Register({ handleRegister, buttonText }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const { email, password } = userDataValue;
+    const { email, password } = formValue;
     handleRegister(email, password);
   }
 
@@ -33,7 +33,7 @@ function Register({ handleRegister, buttonText }) {
           name="email"
           type="email"
           placeholder="Email"
-          value={userDataValue.email}
+          value={formValue.email || ""}
           onChange={handleChange}
           required
         />
@@ -42,7 +42,7 @@ function Register({ handleRegister, buttonText }) {
           name="password"
           type="password"
           placeholder="Пароль"
-          value={userDataValue.password}
+          value={formValue.password || ""}
           onChange={handleChange}
           required
         />

@@ -5,7 +5,7 @@ import success from "../images/success.png";
 function InfoTooltip({ isOpen, onClose, isSuccessful, onOverlayClick }) {
   const message = `${
     isSuccessful
-      ? "Вы успешно зарегистрировались!"
+      ? `Вы успешно зарегистрировались!`
       : `Что-то пошло не так!
     Попробуйте ещё раз.`
   }`;

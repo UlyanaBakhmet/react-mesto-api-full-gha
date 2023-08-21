@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function Login({ handleLogin, buttonText }) {
-  const [userDataValue, setUserDataValue] = useState({
+  const [formValues, setUserDataValue] = useState({
     email: "",
     password: "",
   });
@@ -10,14 +10,14 @@ function Login({ handleLogin, buttonText }) {
     const { name, value } = evt.target;
 
     setUserDataValue({
-      ...userDataValue,
+      ...formValues,
       [name]: value,
     });
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    const { email, password } = userDataValue;
+    const { email, password } = formValues;
     handleLogin(email, password);
   }
 
@@ -30,7 +30,7 @@ function Login({ handleLogin, buttonText }) {
           name="email"
           type="email"
           placeholder="E-mail"
-          value={userDataValue.email}
+          value={formValues.email}
           onChange={handleChange}
           required
         />
@@ -39,7 +39,7 @@ function Login({ handleLogin, buttonText }) {
           name="password"
           type="password"
           placeholder="Пароль"
-          value={userDataValue.password}
+          value={formValues.password}
           onChange={handleChange}
           required
         />

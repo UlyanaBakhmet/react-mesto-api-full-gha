@@ -73,7 +73,7 @@ module.exports.createUser = (req, res, next) => {
       if (err instanceof mongoose.Error.ValidationError) {
         return next(new ValidationError('Предоставлены некорректные данные'));
       }
-      if (err.code === 11000 && err.name === 'MongoServerError') {
+      if (err.code === 11000) {
         return next(new ConflictError('Пользователь с таким email уже существует'));
       }
       return next(err);

@@ -18,7 +18,7 @@ class Api {
   }
 
   setAuthToken (token) {
-    this._headers.Authorization = `Bearer ${token}`;
+    this._headers.authorization = `Bearer ${token}`;
   }
 
   //получаем данные своего пользователя

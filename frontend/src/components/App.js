@@ -76,31 +76,32 @@ function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // }, [navigate]);
 
   //обработчики тултип
-  const handleInfoTooltip = () => {
+  function handleInfoTooltip() {
     setInfoTooltipPopupOpen(true);
-  };
+  }
 
   //метод обработки клика для открытия попапа с данными пользователя
-  const handleEditProfileClick = () => {
+  function handleEditProfileClick() {
     setIsEditProfilePopupOpen(true);
-  };
+  }
 
   //метод обработки клика для открытия попапа с аватаром
-  const handleEditAvatarClick = () => {
+  function handleEditAvatarClick() {
     setIsEditAvatarPopupOpen(true);
-  };
+  }
 
   //метод обработки клика для открытия попапа с добавлением новой фотокарточки
-  const handleAddPlaceClick = () => {
+  function handleAddPlaceClick() {
     setIsAddPlacePopupOpen(true);
-  };
+  }
 
   //метод обработки для открытия попапа с увеличенной карточкой
-  const handleCardClick = (card) => {
+  function handleCardClick(card) {
     setSelectedCard(card);
-  };
+  }
 
   //метод обработки открытия попапа с подтверждением удаления карточки
   function handleConfirmDeleteCardPopup(card) {
@@ -109,14 +110,14 @@ function App() {
   }
 
   //метод обработки для закрытия всех попапов
-  const closeAllPopups = () => {
+  function closeAllPopups() {
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsConfirmPopupOpen(false);
     setSelectedCard(null);
     setInfoTooltipPopupOpen(false);
-  };
+  }
 
   function handleUpdateUser(name, about) {
     setIsLoading(true);
@@ -212,25 +213,23 @@ function App() {
   }
 
   function handleRegister(email, password) {
-    auth
+    return auth
       .register(email, password)
-      .then((res) => {
-        if (res) {
-          handleInfoTooltip();
-          setIsSuccessful(true);
-          navigate("/sign-in", { replace: true });
-        }
+      .then(() => {
+        setIsSuccessful(true);
+        handleInfoTooltip();
+        navigate("/sign-in", { replace: true });
       })
       .catch((err) => {
-        handleInfoTooltip();
         setIsSuccessful(false);
+        handleInfoTooltip();
         console.log(err);
       });
   }
 
   //функция для входа пользователя
   function handleLogin(email, password) {
-    auth
+    return auth
       .login(email, password)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
@@ -240,8 +239,8 @@ function App() {
         navigate("/", { replace: true });
       })
       .catch((err) => {
-        handleInfoTooltip();
         setIsSuccessful(false);
+        handleInfoTooltip();
         console.log(err);
       });
   }
@@ -349,17 +348,19 @@ function App() {
         ></PopupWithConfirmation>
 
         <ImagePopup
-          isOpen={isConfirmPopupOpen}
+          // isOpen={isConfirmPopupOpen}
           card={selectedCard}
           onOverlayClick={handleOverlayClick}
-          text={isSuccessful}
+          message={isSuccessful}
+          // isSuccessful={isSuccessful}
           onClose={closeAllPopups}
         ></ImagePopup>
 
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
-          text={isSuccessful}
+          message={isSuccessful}
+          // isSuccessful={isSuccessful}
           onOverlayClick={handleOverlayClick}
         />
       </div>
@@ -368,4 +369,3 @@ function App() {
 }
 
 export default App;
-
