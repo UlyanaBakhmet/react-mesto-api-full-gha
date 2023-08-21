@@ -76,7 +76,6 @@ function App() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  // }, [navigate]);
 
   //обработчики тултип
   function handleInfoTooltip() {
@@ -348,19 +347,16 @@ function App() {
         ></PopupWithConfirmation>
 
         <ImagePopup
-          // isOpen={isConfirmPopupOpen}
           card={selectedCard}
           onOverlayClick={handleOverlayClick}
-          message={isSuccessful}
-          // isSuccessful={isSuccessful}
+          isSuccessful={isSuccessful}
           onClose={closeAllPopups}
         ></ImagePopup>
 
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
-          message={isSuccessful}
-          // isSuccessful={isSuccessful}
+          isSuccessful={isSuccessful}
           onOverlayClick={handleOverlayClick}
         />
       </div>
